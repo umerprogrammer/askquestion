@@ -1,17 +1,35 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { sendData } from "../config/firebasemethods";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { getData, sendData } from "../config/firebasemethods";
 import { json } from "stream/consumers";
 
 export default function AskQuestion() {
   const navigate = useNavigate();
-  
+  const { id } = useParams();
+
+
   let questObject = {
     question: "",
     createdDateTime: (new Date()).toLocaleDateString() ,
   };
   const [question, setQuestion] = useState(questObject);
+  const getAllQuestions = async () => {
 
+    await getData("questions",id).then((res) => {
+      // console.log(res, "get All");
+         console.log(res,"Single elements");
+         setQuestion(res)
+     }).catch((error) => {
+       console.log(error);
+ 
+     });
+     
+ 
+   };
+
+   useEffect(()=>{
+    getAllQuestions();
+   },[])
   return (
     <>
       <div className="container mt-4 ">
@@ -33,23 +51,8 @@ export default function AskQuestion() {
                   type="button"
                   className="btn btn-sm btn-success "
                   onClick={() => {
-                    sendData("questions",{
-                      "lambeosaurus": {
-                        "dimensions": {
-                          "height" : 2.1,
-                          "length" : 12.5,
-                          "weight": 5000
-                        }
-                      }} );
-                    console.log({ 
-                      "lambeosaurus": {
-                        "dimensions": {
-                          "height" : 2.1,
-                          "length" : 12.5,
-                          "weight": 5000
-                        }
-                      }},"send Data");
-                    
+                    sendData("questions",question );
+                    navigate("/showall")                    
                   }}
                 >
                   Send

@@ -11,6 +11,7 @@ const AppRouter =()=>{
          <Route path="/" element={<ShowAllQuestion/>}/>
          <Route path='/askquestion' element={<AskQuestion/>}/>
          <Route path='/askquestion/:id' element={<AskQuestion/>}/> 
+         <Route path='/showall' element={<ShowAllQuestion/>}/> 
         </Routes>
     </BrowserRouter>
     </>
