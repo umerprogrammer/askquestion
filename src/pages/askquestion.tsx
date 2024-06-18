@@ -21,18 +21,14 @@ export default function AskQuestion() {
          setQuestion(res)
      }).catch((error) => {
        console.log(error);
- 
      });
-     
- 
    };
 
    useEffect(()=>{
     getAllQuestions();
    },[])
   return (
-    <>
-      <div className="container mt-4 ">
+    <> <div className="container mt-4 ">
         <div className="row w-100">
           <div className="col-md-6">
             <div className="d-flex flex-column">

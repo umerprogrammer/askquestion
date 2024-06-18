@@ -51,7 +51,7 @@ export default function ShowAllQuestion() {
           </div>
         </div>
          {
-            
+       
           allQuestions?.map((x: any, i: any) => {
              return <Questions key={i} question={x.data.question} answer={x.key} keyId={x.key} />
           })
